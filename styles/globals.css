@@ -10,4 +10,12 @@
   .hero-landing {
     @apply text-3xl text-white font-semibold;
   }
+
+  .nav-button {
+    @apply text-[#253439] font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-10 w-20;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-200 to-orange-200 bg-clip-text text-transparent;
+  }
 }

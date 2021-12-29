@@ -1,12 +1,16 @@
-import { getSession } from 'next-auth/client';
+import DashboardLayout from '@/Layouts/DashboardLayout';
 import Head from 'next/head';
 
-function DashboardPage({ session }) {
+function DashboardPage() {
   return (
     <div>
       <Head>
-        <title>Dashboard | {}</title>
+        <title>Dashboard | </title>
       </Head>
+
+      <DashboardLayout>
+        <h1>Dashboard</h1>
+      </DashboardLayout>
     </div>
   );
 }

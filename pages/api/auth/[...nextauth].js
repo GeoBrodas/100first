@@ -5,6 +5,9 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  pages: {
+    signIn: '/auth/sign-in',
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
