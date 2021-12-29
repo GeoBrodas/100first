@@ -5,7 +5,7 @@ import { AiFillGithub } from 'react-icons/ai';
 
 function SignInPage({ providers }) {
   return (
-    <div className="grid bg-emerald-400 place-content-center h-screen">
+    <div className="grid bg-gradient-to-tl from-red-400 via-orange-600 to-blue-500 place-content-center h-screen">
       <Head>
         <title>Sign In</title>
       </Head>
@@ -15,10 +15,13 @@ function SignInPage({ providers }) {
         <div className="py-4 w-1/3">
           <p className="text-lg">
             100First is a web application build to track your{' '}
-            <b>#100daysofcode</b> challenge. 100First lets you document your
-            journey through each day and motivating at each step. You can also
-            share your list with your friends on social networks to support them
-            in their journey towards learning programming languages.
+            <b className="bg-gradient-to-r from-orange-600 to-violet-700 bg-clip-text text-transparent">
+              #100daysofcode
+            </b>{' '}
+            challenge. 100First lets you document your journey through each day
+            and motivating at each step. You can also share your list with your
+            friends on social networks to support them in their journey towards
+            learning programming languages.
           </p>
         </div>
 
