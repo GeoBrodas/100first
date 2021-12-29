@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 function NavLanding({ children }) {
   return (
@@ -18,7 +19,7 @@ function NavLanding({ children }) {
         {/* Sign-In and GitHub */}
         <div className="flex space-x-4 items-center w-auto">
           <button className="text-[#253439] md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-10 w-20">
-            Sign-In
+            <Link href="/auth/sign-in">Sign-In</Link>
           </button>
           <button className="text-[#253439] md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-10 w-20">
             GitHub
