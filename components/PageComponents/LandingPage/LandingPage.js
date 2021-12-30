@@ -5,8 +5,8 @@ function LandingPage() {
   return (
     <NavLanding>
       {/* Hero */}
-      <div className="flex flex-col md:flex-row items-center md:space-x-2">
-        <div className="flex px-4 md:px-2 w-3/4 md:w-2/3 mx-auto md:text-right flex-col space-y-4 mt-10 mb-0 md:my-20">
+      <div className="flex flex-col md:flex-row items-center md:space-x-2 my-10">
+        <div className="flex md:px-2 w-3/4 md:w-2/3 mx-auto md:text-right flex-col space-y-4 mt-10 mb-0 md:my-20">
           <h2 className="hero-landing">
             A platform for the official{' '}
             <a className="text-gradient font-bold">#100daysofcode</a> challenge!
