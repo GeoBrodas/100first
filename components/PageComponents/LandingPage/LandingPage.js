@@ -5,8 +5,8 @@ function LandingPage() {
   return (
     <NavLanding>
       {/* Hero */}
-      <div className="flex items-center space-x-2">
-        <div className="flex text-right flex-col px-5 space-y-4 my-20">
+      <div className="flex flex-col md:flex-row items-center md:space-x-2">
+        <div className="flex md:text-right flex-col px-5 space-y-4 my-10 md:my-20">
           <div className="flex">
             <h2 className="hero-landing">
               A platform for the official
@@ -24,7 +24,7 @@ function LandingPage() {
         </div>
 
         {/* Image */}
-        <div className="h-1/3 w-1/2">
+        <div className="h-full w-full md:h-1/3 md:w-1/2">
           <Image
             alt="landing-image"
             width={100}

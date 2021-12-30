@@ -4,7 +4,7 @@ import { signOut, useSession } from 'next-auth/react';
 function DashboardLayout({ children }) {
   const greeting = getGreetingBasedOnTime();
   const { data: session, status } = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <div>

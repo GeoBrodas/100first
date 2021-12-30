@@ -4,7 +4,7 @@ import { AiFillGithub } from 'react-icons/ai';
 
 function NavLanding({ children }) {
   return (
-    <div className="px-10">
+    <div className="px-5 md:px-10">
       <div className="flex flex-row justify-between">
         {/* Logo :: Sign-In : GitHub */}
         <div className="md:hover:scale-105 transition duration-100 ease-in-out">
