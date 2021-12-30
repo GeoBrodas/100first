@@ -8,7 +8,7 @@
   }
 
   .hero-landing {
-    @apply text-3xl text-white font-semibold;
+    @apply text-2xl md:text-3xl text-white font-semibold;
   }
 
   .nav-button {

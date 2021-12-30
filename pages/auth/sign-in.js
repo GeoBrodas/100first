@@ -11,7 +11,7 @@ function SignInPage({ providers }) {
       </Head>
 
       {/* <button>Sign In</button> */}
-      <div className="bg-white rounded-lg shadow-lg p-3 md:p-5 w-1/2 mx-auto flex flex-col md:flex-row justify-around">
+      <div className="bg-white rounded-lg shadow-lg p-3 md:p-5 w-3/4 md:w-1/2 mx-auto flex flex-col md:flex-row justify-around">
         <div className="text-center py-4 w-full md:w-1/3">
           <p className="text-lg">
             100First is a web application build to track your{' '}
