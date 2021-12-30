@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/client';
+// import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 
 function UserProfilePage() {
