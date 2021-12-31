@@ -10,6 +10,11 @@ module.exports = {
         CustomGreen: '#c9e265',
       },
     },
+    backgroundColor: (theme) => ({
+      ...theme('colors'),
+      CustomGreen: '#c9e265',
+      CustomeDark: '#253439',
+    }),
   },
   plugins: [],
 };
