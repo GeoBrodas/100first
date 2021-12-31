@@ -7,9 +7,9 @@ function DashboardLayout({ children }) {
   // console.log(session);
 
   return (
-    <div>
+    <div className="px-6">
       {/* User naviagtion bar */}
-      <div className="flex justify-between px-6 py-4">
+      <div className="flex justify-between py-4">
         <p className="text-gradient text-2xl font-bold">
           {greeting}{' '}
           <span className="text-white">{session && session.user.name} !</span>
@@ -23,6 +23,7 @@ function DashboardLayout({ children }) {
           <button className="nav-button">GitHub</button>
         </div>
       </div>
+
       {children}
     </div>
   );

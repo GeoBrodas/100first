@@ -1,3 +1,4 @@
+import DashboardAdmin from '@/components/PageComponents/Dashboard/DashboardAdmin';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
@@ -11,7 +12,7 @@ function DashboardPage({ session }) {
       </Head>
 
       <DashboardLayout>
-        <h1>Dashboard</h1>
+        <DashboardAdmin />
       </DashboardLayout>
     </div>
   );

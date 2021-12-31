@@ -5,7 +5,11 @@ module.exports = {
     './Layouts/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        CustomGreen: '#c9e265',
+      },
+    },
   },
   plugins: [],
 };
