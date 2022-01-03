@@ -24,6 +24,6 @@
   }
 
   .timer-btn {
-    @apply py-2 px-4 mr-2 bg-CustomDark text-white text-center text-xl font-bold rounded-md transition hover:scale-105 duration-75 ease-in-out;
+    @apply h-14 w-14 p-3.5 mr-2 bg-CustomDark text-white text-xl font-bold rounded-full transition hover:scale-105 duration-75 ease-in-out;
   }
 }

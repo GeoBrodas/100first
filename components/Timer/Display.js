@@ -15,7 +15,7 @@ function Display({ time }) {
   };
 
   return (
-    <div className="w-1/2 md:w-1/3 text-xl font-extrabold items-center flex justify-evenly space-x-2">
+    <div className="w-full md:w-1/3 text-xl font-extrabold items-center flex justify-evenly space-x-2">
       {hoursDisplay()}
       <span className="timer-dial">
         {time.m >= 10 ? time.m : '0' + time.m}

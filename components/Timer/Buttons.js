@@ -1,9 +1,12 @@
+import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
+import { TiTickOutline } from 'react-icons/ti';
+
 function Buttons({ start, resume, stop, reset, status }) {
   return (
-    <div className="w-1/2 md:w-1/3 flex justify-around">
+    <div className="w-full md:w-1/3 flex justify-around">
       {status === 0 ? (
         <button className="timer-btn" onClick={start}>
-          Start
+          <AiOutlinePlayCircle className="h-7 w-7" />
         </button>
       ) : (
         ''
@@ -12,10 +15,10 @@ function Buttons({ start, resume, stop, reset, status }) {
       {status === 1 ? (
         <div>
           <button className="timer-btn" onClick={stop}>
-            Stop
+            <AiOutlinePauseCircle className="h-7 w-7" />
           </button>
           <button className="timer-btn" onClick={reset}>
-            Reset
+            <TiTickOutline className="h-7 w-7" />
           </button>
         </div>
       ) : (
@@ -25,10 +28,10 @@ function Buttons({ start, resume, stop, reset, status }) {
       {status === 2 ? (
         <div>
           <button className="timer-btn" onClick={resume}>
-            Resume
+            <AiOutlinePlayCircle className="h-7 w-7" />
           </button>
           <button className="timer-btn" onClick={reset}>
-            Reset
+            <TiTickOutline className="h-7 w-7" />
           </button>
         </div>
       ) : (
