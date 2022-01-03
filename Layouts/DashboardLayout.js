@@ -10,7 +10,7 @@ function DashboardLayout({ children }) {
     <div className="px-6">
       {/* User naviagtion bar */}
       <div className="flex justify-between py-4">
-        <p className="text-gradient text-2xl font-bold">
+        <p className="text-gradient text-xl md:text-3xl font-bold">
           {greeting}{' '}
           <span className="text-white">{session && session.user.name} !</span>
         </p>

@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import Buttons from './Buttons';
+import Display from './Display';
 
 function MainTimerBody() {
-  const [time, setTimeout] = useState({
+  const [time, setTime] = useState({
     ms: 0,
-    s: 0,
-    m: 0,
+    s: 58,
+    m: 59,
     h: 0,
   });
 
@@ -60,7 +62,18 @@ function MainTimerBody() {
   //   resume timer function
   const resumeTimer = () => startTimer();
 
-  return <div></div>;
+  return (
+    <div className="flex my-10 rounded-lg items-center w-full md:w-2/3 h-24 mx-auto justify-around bg-gradient-to-r from-red-200 via-orange-100 to-amber-100 p-2">
+      <Display time={time} />
+      <Buttons
+        status={status}
+        resume={resumeTimer}
+        reset={resetTimer}
+        stop={pauseTimer}
+        start={startTimer}
+      />
+    </div>
+  );
 }
 
 export default MainTimerBody;

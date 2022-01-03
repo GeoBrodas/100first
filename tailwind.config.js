@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         CustomGreen: '#c9e265',
+        CustomDark: '#253439',
       },
     },
     backgroundColor: (theme) => ({
