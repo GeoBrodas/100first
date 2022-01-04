@@ -4,7 +4,7 @@ import { connectToDb } from 'lib/mongodb';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 
-function DashboardPage({ session, data }) {
+function DashboardPage({ data }) {
   const parsedData = JSON.parse(data);
 
   console.log(parsedData);

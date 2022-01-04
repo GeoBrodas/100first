@@ -1,6 +1,9 @@
+import MainInputComponent from '@/components/InputComponent/MainInputComponent';
 import MainTimerBody from '@/components/Timer/MainTimerBody';
 
 function DashboardAdmin({ data }) {
+  const day = data.length + 1;
+
   return (
     <div>
       <div className="flex space-x-4 bg-[#c9e265] w-fit py-2 px-4 rounded-md items-center">
@@ -14,6 +17,9 @@ function DashboardAdmin({ data }) {
 
       {/* Timer component */}
       <MainTimerBody />
+
+      {/* Input field */}
+      <MainInputComponent day={day} />
     </div>
   );
 }
