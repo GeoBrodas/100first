@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Buttons from './Buttons';
 import Display from './Display';
 
-function MainTimerBody() {
+function MainTimerBody({ setFinalTime, finalTime }) {
   const [time, setTime] = useState({
     ms: 0,
     s: 0,
@@ -41,9 +41,29 @@ function MainTimerBody() {
 
   //   start timer function
   const startTimer = () => {
-    run();
-    setStatus(1);
-    setInterv(setInterval(run, 10));
+    // run as normal on first click!
+    if (finalTime === '') {
+      run();
+      setStatus(1);
+      setInterv(setInterval(run, 10));
+      return;
+    }
+
+    // if user tries to start timer again the previosuly set set Time will be lost
+    if (
+      confirm(
+        'Are you sure you want to start the timer?' +
+          '\n' +
+          'This will reset the timer and the set time will be lost.'
+      ) === true
+    ) {
+      run();
+      setStatus(1);
+      setInterv(setInterval(run, 10));
+      setFinalTime('');
+    } else {
+      return;
+    }
   };
 
   //   pause timer function
@@ -57,6 +77,9 @@ function MainTimerBody() {
     clearInterval(interv);
     setStatus(0);
     setTime({ ms: 0, s: 0, m: 0, h: 0 });
+
+    // set setFinalTime
+    setFinalTime(`${time.h}:${time.m}:${time.s}:${time.ms}`);
   };
 
   //   resume timer function

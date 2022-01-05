@@ -1,7 +1,12 @@
 import MainInputComponent from '@/components/InputComponent/MainInputComponent';
 import MainTimerBody from '@/components/Timer/MainTimerBody';
+import { formatTime } from 'lib/time';
+import { useState } from 'react';
 
 function DashboardAdmin({ data, email }) {
+  // set final time
+  const [finalTime, setFinalTime] = useState('');
+
   let day;
 
   if (data.length === 0) {
@@ -22,7 +27,13 @@ function DashboardAdmin({ data, email }) {
       </div>
 
       {/* Timer component */}
-      <MainTimerBody />
+      <MainTimerBody finalTime={finalTime} setFinalTime={setFinalTime} />
+
+      {finalTime && (
+        <p className="text-center mb-10 text-white text-2xl">
+          You have spent {formatTime(finalTime)} today!
+        </p>
+      )}
 
       {/* Input field */}
       <MainInputComponent email={email} day={day} />
