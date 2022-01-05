@@ -26,4 +26,16 @@
   .timer-btn {
     @apply h-14 w-14 p-3.5 mr-2 bg-CustomDark text-white text-xl font-bold rounded-full transition hover:scale-105 duration-75 ease-in-out;
   }
+
+  .input-custom {
+    @apply p-2 rounded-md border-2 focus:outline-none focus:border-CustomDark;
+  }
+
+  .hover-gradient-bg {
+    @apply bg-gradient-to-r from-orange-600 to-red-400;
+  }
+
+  .hover-animation-btn {
+    @apply transition duration-75 hover:scale-105 ease-in-out;
+  }
 }
