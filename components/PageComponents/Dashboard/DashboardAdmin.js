@@ -2,6 +2,7 @@ import MainInputComponent from '@/components/InputComponent/MainInputComponent';
 import MainTimerBody from '@/components/Timer/MainTimerBody';
 import { formatTime } from 'lib/time';
 import { useState } from 'react';
+import { Fade } from 'react-awesome-reveal';
 
 function DashboardAdmin({ data, email }) {
   // set final time
@@ -30,13 +31,20 @@ function DashboardAdmin({ data, email }) {
       <MainTimerBody finalTime={finalTime} setFinalTime={setFinalTime} />
 
       {finalTime && (
-        <p className="text-center mb-10 text-white text-2xl">
-          You have spent {formatTime(finalTime)} today!
-        </p>
+        <Fade>
+          <p className="text-center mb-10 text-white text-2xl">
+            You have spent {formatTime(finalTime)} today!
+          </p>
+        </Fade>
       )}
 
       {/* Input field */}
-      <MainInputComponent email={email} day={day} />
+      <MainInputComponent
+        setFinalTime={setFinalTime}
+        finalTime={finalTime}
+        email={email}
+        day={day}
+      />
     </div>
   );
 }

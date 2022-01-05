@@ -9,14 +9,14 @@ async function handler(req, res) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { day, day_report, project_link, email } = req.body;
+    const { day, day_report, project_link, email, time } = req.body;
 
     // if no day or day_report provided, return error
-    if (!day || !day_report || !email) {
+    if (!day || !day_report || !email || !time) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    console.log(day, day_report, project_link, email);
+    // console.log(day, day_report, project_link, email);
 
     const client = await connectToDb();
 
@@ -37,6 +37,7 @@ async function handler(req, res) {
         email,
         days: [
           {
+            duration: time,
             day,
             day_report,
             project_link,
@@ -49,6 +50,7 @@ async function handler(req, res) {
         {
           $push: {
             days: {
+              duration: time,
               day,
               day_report,
               project_link,

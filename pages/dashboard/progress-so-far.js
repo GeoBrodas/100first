@@ -1,4 +1,4 @@
-function CompletedDaysPage() {
+function ProgressPage() {
   return <div></div>;
 }
 
@@ -9,4 +9,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default CompletedDaysPage;
+export default ProgressPage;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function MainInputComponent({ day, email }) {
+function MainInputComponent({ day, email, finalTime, setFinalTime }) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
 
@@ -10,6 +10,15 @@ function MainInputComponent({ day, email }) {
       return alert('Missing required fields');
     } else if (day_report.length > 300) {
       return alert('Day report is too long');
+    }
+
+    // if no finalTime, return error
+    if (!finalTime) {
+      setDayReport('');
+      setProjectLink('');
+      return alert(
+        'You have not started todays session yet \nPlease start the timer to start your session'
+      );
     }
 
     // check if project_link contains valid links in the format 'https://something.com' or 'www.something.com'
@@ -29,6 +38,7 @@ function MainInputComponent({ day, email }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          time: finalTime,
           email,
           day,
           day_report,
@@ -50,10 +60,11 @@ function MainInputComponent({ day, email }) {
     // clear fields
     setDayReport('');
     setProjectLink('');
+    setFinalTime('');
   }
 
   return (
-    <div className="flex flex-col rounded-lg py-6 bg-CustomGreen text-CustomDark mx-auto items-center px-4 md:px-0  w-full md:w-2/3">
+    <div className="flex flex-col rounded-lg py-6 mb-10 bg-CustomGreen text-CustomDark mx-auto items-center px-4 md:px-0  w-full md:w-2/3">
       <div className="space-y-4 w-full md:w-2/3">
         <p className="text-2xl font-semibold">Day {day} submission</p>
 
@@ -85,8 +96,9 @@ function MainInputComponent({ day, email }) {
         </div>
 
         <button
+          // disabled={!day_report && !finalTime}
           onClick={sendData}
-          className="bg-CustomDark p-2 font-bold hover-animation-btn hover:hover-gradient-bg rounded-md"
+          className="hover:hover-gradient-bg hover-animation-btn bg-CustomDark disabled:bg-gray-300 disabled:text-black p-2 font-bold rounded-md"
         >
           <span className="text-white">Submit</span>
         </button>
