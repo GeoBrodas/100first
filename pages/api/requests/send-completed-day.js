@@ -5,15 +5,15 @@ async function handler(req, res) {
 
   if (req.method === 'POST') {
     // protect API routes from unauthenticated users
-    if (req.query.API_ROUTE_KEY !== process.env.API_ROUTE_KEY) {
-      return res.status(401).send('Unauthorized');
+    if (req.query.API_ROUTE_KEY !== process.env.NEXT_PUBLIC_API_ROUTE_KEY) {
+      return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const { day, day_report, project_link, email } = req.body;
 
     // if no day or day_report provided, return error
-    if (!day || !day_report || !project_link || !email) {
-      return res.status(400).send('Missing required fields');
+    if (!day || !day_report || !email) {
+      return res.status(400).json({ message: 'Missing required fields' });
     }
 
     console.log(day, day_report, project_link, email);
@@ -26,41 +26,41 @@ async function handler(req, res) {
       .collection('user_data')
       .find({ email: email })
       .toArray();
-    console.log(userData);
+    // console.log(userData);
 
-    res.send('success');
+    // res.send('success');
 
-    // let response;
+    let response;
 
-    // if (userData.length === 0) {
-    //   response = await db.collection('user_data').insertOne({
-    //     email,
-    //     days: [
-    //       {
-    //         day,
-    //         day_report,
-    //         project_link,
-    //       },
-    //     ],
-    //   });
-    // } else {
-    //   response = await db.collection('user_data').updateOne(
-    //     { email },
-    //     {
-    //       $push: {
-    //         days: {
-    //           day,
-    //           day_report,
-    //           project_link,
-    //         },
-    //       },
-    //     }
-    //   );
-    // }
+    if (userData.length === 0) {
+      response = await db.collection('user_data').insertOne({
+        email,
+        days: [
+          {
+            day,
+            day_report,
+            project_link,
+          },
+        ],
+      });
+    } else {
+      response = await db.collection('user_data').updateOne(
+        { email },
+        {
+          $push: {
+            days: {
+              day,
+              day_report,
+              project_link,
+            },
+          },
+        }
+      );
+    }
 
-    // client.close();
+    client.close();
 
-    // return res.status(200).json({ message: 'OK', response });
+    return res.status(200).json({ message: 'OK', response });
   }
 }
 

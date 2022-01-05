@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function MainInputComponent({ day }) {
+function MainInputComponent({ day, email }) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
 
@@ -20,18 +20,32 @@ function MainInputComponent({ day }) {
       return alert('Project link is not valid');
     }
 
-    // make fetch request to api route '/api/send-completed-day'
-    // await fetch('/api/send-completed-day', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     day,
-    //     day_report,
-    //     project_link,
-    //   }),
-    // });
+    // make fetch request to api route '/api/send-completed-day' with API_ROUTE_KEY as query param
+    await fetch(
+      `/api/requests/send-completed-day?API_ROUTE_KEY=${process.env.NEXT_PUBLIC_API_ROUTE_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          day,
+          day_report,
+          project_link,
+        }),
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          alert('Success');
+        } else {
+          alert(res.statusText);
+        }
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
 
     // clear fields
     setDayReport('');

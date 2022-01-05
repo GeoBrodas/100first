@@ -1,11 +1,13 @@
 import DashboardAdmin from '@/components/PageComponents/Dashboard/DashboardAdmin';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { connectToDb } from 'lib/mongodb';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 
 function DashboardPage({ data }) {
   const parsedData = JSON.parse(data);
+
+  const { data: session, status } = useSession();
 
   console.log(parsedData);
   return (
@@ -15,7 +17,7 @@ function DashboardPage({ data }) {
       </Head>
 
       <DashboardLayout>
-        <DashboardAdmin data={parsedData} />
+        <DashboardAdmin email={session?.user.email} data={parsedData} />
       </DashboardLayout>
     </div>
   );
@@ -44,7 +46,6 @@ export async function getServerSideProps(context) {
     .toArray();
 
   const stringifiedData = JSON.stringify(response);
-  // console.log(stringifiedData);
 
   client.close();
 
