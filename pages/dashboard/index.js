@@ -8,13 +8,13 @@ import Head from 'next/head';
 function DashboardPage({ data, lastSubmittedDataTIme }) {
   const parsedData = JSON.parse(data);
 
-  let currentTime = new Date(Date.now())
+  const currentTime = new Date(Date.now())
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
-  // console.log(currentTime, lastSubmittedDataTIme);
+  console.log(currentTime, lastSubmittedDataTIme);
 
-  const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
+  // const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
   const { data: session, status } = useSession();
 
   return (
@@ -24,11 +24,11 @@ function DashboardPage({ data, lastSubmittedDataTIme }) {
       </Head>
 
       <DashboardLayout>
-        <DashboardAdmin
+        {/* <DashboardAdmin
           nextDay={nextDay}
           email={session?.user.email}
           data={parsedData}
-        />
+        /> */}
       </DashboardLayout>
     </div>
   );
@@ -62,7 +62,7 @@ export async function getServerSideProps(context) {
   const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
 
   // get day from local time
-  const day = parsedLocalTime.split(',')[0].split('/')[0];
+  const day = parsedLocalTime.split(',')[0];
 
   // console.log(parsedLocalTime);
 
