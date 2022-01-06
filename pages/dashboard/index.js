@@ -13,8 +13,13 @@ function DashboardPage({ data, lastSubmittedDataTIme }) {
     .split(',')[0]
     .split('/')[1];
 
-  const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
-  // console.log(currentTime, lastSubmittedDataTIme, nextDay);
+  const serverTimeOfLastData = new Date(lastSubmittedDataTIme)
+    .toLocaleString()
+    .split(',')[0]
+    .split('/')[1];
+
+  const nextDay = findIfNextDay(currentTime, serverTimeOfLastData);
+  console.log(currentTime, serverTimeOfLastData, nextDay);
   const { data: session, status } = useSession();
 
   return (
@@ -60,10 +65,10 @@ export async function getServerSideProps(context) {
   const parsedServerTime = response[0]?.days.at(-1).at;
 
   // convert time to local time
-  const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
+  //const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
 
   // get day from local time
-  const day = parsedLocalTime.split(',')[0].split('/')[0];
+  //const day = parsedLocalTime.split(',')[0].split('/')[0];
 
   // console.log(parsedLocalTime);
 
@@ -73,7 +78,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      lastSubmittedDataTIme: day,
+      lastSubmittedDataTIme: parsedServerTime,
       session,
       data: stringifiedData,
     },
