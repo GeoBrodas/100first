@@ -4,7 +4,7 @@ import { formatTime } from 'lib/time';
 import { useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 
-function DashboardAdmin({ data, email }) {
+function DashboardAdmin({ data, email, nextDay }) {
   // set final time
   const [finalTime, setFinalTime] = useState('');
 
@@ -20,10 +20,12 @@ function DashboardAdmin({ data, email }) {
     <div>
       <div className="flex space-x-4 bg-[#c9e265] w-fit py-2 px-4 rounded-md items-center">
         <h1 className="text-xl font-light py-1 px-2 rounded-md bg-emerald-100">
-          Day {day}/100
+          {!nextDay && 'Next ->'} Day {day}/100
         </h1>
         <h3 className="font-normal text-lg">
-          You have not started todays session yet
+          {nextDay
+            ? 'You have not started todays session yet'
+            : 'Come back tomorrow to start a new session'}
         </h3>
       </div>
 
@@ -40,6 +42,7 @@ function DashboardAdmin({ data, email }) {
 
       {/* Input field */}
       <MainInputComponent
+        isNextDay={nextDay}
         setFinalTime={setFinalTime}
         finalTime={finalTime}
         email={email}

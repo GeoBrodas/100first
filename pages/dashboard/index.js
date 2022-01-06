@@ -1,15 +1,22 @@
 import DashboardAdmin from '@/components/PageComponents/Dashboard/DashboardAdmin';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { connectToDb } from 'lib/mongodb';
+import { findIfNextDay } from 'lib/time';
 import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 
-function DashboardPage({ data }) {
+function DashboardPage({ data, lastSubmittedDataTIme }) {
   const parsedData = JSON.parse(data);
 
+  let currentTime = new Date(Date.now())
+    .toLocaleString()
+    .split(',')[0]
+    .split('/')[1];
+  // console.log(currentTime, lastSubmittedDataTIme);
+
+  const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
   const { data: session, status } = useSession();
 
-  console.log(parsedData);
   return (
     <div>
       <Head>
@@ -17,7 +24,11 @@ function DashboardPage({ data }) {
       </Head>
 
       <DashboardLayout>
-        <DashboardAdmin email={session?.user.email} data={parsedData} />
+        <DashboardAdmin
+          nextDay={nextDay}
+          email={session?.user.email}
+          data={parsedData}
+        />
       </DashboardLayout>
     </div>
   );
@@ -45,12 +56,23 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
+  const parsedServerTime = response[0]?.days.at(-1).at;
+
+  // convert time to local time
+  const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
+
+  // get day from local time
+  const day = parsedLocalTime.split(',')[0].split('/')[0];
+
+  // console.log(parsedLocalTime);
+
   const stringifiedData = JSON.stringify(response);
 
   client.close();
 
   return {
     props: {
+      lastSubmittedDataTIme: day,
       session,
       data: stringifiedData,
     },

@@ -1,15 +1,24 @@
 import { useState } from 'react';
 
-function MainInputComponent({ day, email, finalTime, setFinalTime }) {
+function MainInputComponent({
+  day,
+  email,
+  finalTime,
+  setFinalTime,
+  isNextDay,
+}) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
 
+  const time = new Date().toLocaleString().split(',')[0].split('/')[1];
+
   async function sendData() {
-    // if no day or day_report provided, return error
-    if (!day_report) {
-      return alert('Missing required fields');
-    } else if (day_report.length > 300) {
-      return alert('Day report is too long');
+    // if user has already submitted a challenge submission return error message
+    if (!isNextDay) {
+      setDayReport('');
+      setProjectLink('');
+      setFinalTime('');
+      return alert('You have already completed a session today');
     }
 
     // if no finalTime, return error
@@ -19,6 +28,13 @@ function MainInputComponent({ day, email, finalTime, setFinalTime }) {
       return alert(
         'You have not started todays session yet \nPlease start the timer to start your session'
       );
+    }
+
+    // if no day or day_report provided, return error
+    if (!day_report) {
+      return alert('Missing required fields');
+    } else if (day_report.length > 300) {
+      return alert('Day report is too long');
     }
 
     // check if project_link contains valid links in the format 'https://something.com' or 'www.something.com'
@@ -38,6 +54,7 @@ function MainInputComponent({ day, email, finalTime, setFinalTime }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          clientLocalTime: time,
           time: finalTime,
           email,
           day,
@@ -47,10 +64,11 @@ function MainInputComponent({ day, email, finalTime, setFinalTime }) {
       }
     )
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           alert('Success');
-        } else {
-          alert(res.statusText);
+        } else if (res.statusText === 'Bad Request') {
+          alert('Looks like you already submitted todays challenge');
         }
       })
       .catch((err) => {
@@ -61,6 +79,10 @@ function MainInputComponent({ day, email, finalTime, setFinalTime }) {
     setDayReport('');
     setProjectLink('');
     setFinalTime('');
+  }
+
+  function disabledHandler() {
+    return !day_report || !finalTime;
   }
 
   return (
@@ -96,7 +118,7 @@ function MainInputComponent({ day, email, finalTime, setFinalTime }) {
         </div>
 
         <button
-          // disabled={!day_report && !finalTime}
+          disabled={disabledHandler()}
           onClick={sendData}
           className="hover:hover-gradient-bg hover-animation-btn bg-CustomDark disabled:bg-gray-300 disabled:text-black p-2 font-bold rounded-md"
         >
