@@ -5,16 +5,15 @@ import { findIfNextDay } from 'lib/time';
 import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 
-function DashboardPage({ data, lastSubmittedDataTIme }) {
+function DashboardPage({ data }) {
   const parsedData = JSON.parse(data);
-  const paresedTime = JSON.parse(lastSubmittedDataTIme);
 
   const currentTime = new Date(Date.now())
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
 
-  const lastTime = paresedTime[0]?.days.at(-1).at;
+  const lastTime = parsedData[0]?.days.at(-1).at;
 
   const serverTimeOfLastData = new Date(lastTime)
     .toLocaleString()
@@ -33,7 +32,7 @@ function DashboardPage({ data, lastSubmittedDataTIme }) {
 
       <DashboardLayout>
         <DashboardAdmin
-          lastSubmittedDataTIme={lastSubmittedDataTIme}
+          serverTimeOfLastData={serverTimeOfLastData}
           nextDay={nextDay}
           email={session?.user.email}
           data={parsedData}
@@ -71,9 +70,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      lastSubmittedDataTIme: JSON.stringify(response),
-      session,
       data: stringifiedData,
+      session,
     },
   };
 }

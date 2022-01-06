@@ -6,7 +6,7 @@ function MainInputComponent({
   finalTime,
   setFinalTime,
   isNextDay,
-  lastSubmittedDataTIme,
+  serverTimeOfLastData,
 }) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
@@ -55,7 +55,7 @@ function MainInputComponent({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          clientLocalTime: lastSubmittedDataTIme,
+          clientLocalTime: serverTimeOfLastData,
           time: finalTime,
           email,
           day,
@@ -68,8 +68,8 @@ function MainInputComponent({
         console.log(res);
         if (res.status === 200) {
           alert('Success');
-        } else if (res.statusText === 'Bad Request') {
-          alert('Looks like you already submitted todays challenge');
+        } else {
+          alert(res.statusText);
         }
       })
       .catch((err) => {

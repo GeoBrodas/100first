@@ -3,8 +3,9 @@ import MainTimerBody from '@/components/Timer/MainTimerBody';
 import { formatTime } from 'lib/time';
 import { useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
+import LastSubmission from './LastSubmission';
 
-function DashboardAdmin({ data, email, nextDay, lastSubmittedDataTIme }) {
+function DashboardAdmin({ data, email, nextDay, serverTimeOfLastData }) {
   // set final time
   const [finalTime, setFinalTime] = useState('');
 
@@ -45,13 +46,18 @@ function DashboardAdmin({ data, email, nextDay, lastSubmittedDataTIme }) {
 
       {/* Input field */}
       <MainInputComponent
-        lastSubmittedDataTIme={lastSubmittedDataTIme}
+        serverTimeOfLastData={serverTimeOfLastData}
         isNextDay={nextDay}
         setFinalTime={setFinalTime}
         finalTime={finalTime}
         email={email}
         day={day}
       />
+
+      {/* Previously submitted challenge */}
+      {data[0]?.days.length !== 0 && (
+        <LastSubmission nextDay={nextDay} data={data} />
+      )}
     </div>
   );
 }
