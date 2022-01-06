@@ -6,6 +6,7 @@ function MainInputComponent({
   finalTime,
   setFinalTime,
   isNextDay,
+  lastSubmittedDataTIme,
 }) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
@@ -54,7 +55,7 @@ function MainInputComponent({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          clientLocalTime: time,
+          clientLocalTime: lastSubmittedDataTIme,
           time: finalTime,
           email,
           day,

@@ -12,9 +12,9 @@ function DashboardPage({ data, lastSubmittedDataTIme }) {
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
-  console.log(currentTime, lastSubmittedDataTIme);
 
-  // const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
+  const nextDay = findIfNextDay(currentTime, lastSubmittedDataTIme);
+  // console.log(currentTime, lastSubmittedDataTIme, nextDay);
   const { data: session, status } = useSession();
 
   return (
@@ -24,11 +24,12 @@ function DashboardPage({ data, lastSubmittedDataTIme }) {
       </Head>
 
       <DashboardLayout>
-        {/* <DashboardAdmin
+        <DashboardAdmin
+          lastSubmittedDataTIme={lastSubmittedDataTIme}
           nextDay={nextDay}
           email={session?.user.email}
           data={parsedData}
-        /> */}
+        />
       </DashboardLayout>
     </div>
   );
@@ -56,13 +57,13 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  // const parsedServerTime = response[0]?.days.at(-1).at;
+  const parsedServerTime = response[0]?.days.at(-1).at;
 
   // convert time to local time
-  // const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
+  const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
 
   // get day from local time
-  // const day = parsedLocalTime.split(',')[0];
+  const day = parsedLocalTime.split(',')[0].split('/')[0];
 
   // console.log(parsedLocalTime);
 
@@ -72,7 +73,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      // lastSubmittedDataTIme: day,
+      lastSubmittedDataTIme: day,
       session,
       data: stringifiedData,
     },
