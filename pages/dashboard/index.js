@@ -65,16 +65,6 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  // const parsedServerTime = response[0]?.days.at(-1).at;
-
-  // convert time to local time
-  //const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
-
-  // get day from local time
-  //const day = parsedLocalTime.split(',')[0].split('/')[0];
-
-  // console.log(parsedLocalTime);
-
   const stringifiedData = JSON.stringify(response);
 
   client.close();
