@@ -7,13 +7,16 @@ import Head from 'next/head';
 
 function DashboardPage({ data, lastSubmittedDataTIme }) {
   const parsedData = JSON.parse(data);
+  const paresedTime = JSON.parse(lastSubmittedDataTIme);
 
   const currentTime = new Date(Date.now())
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
 
-  const serverTimeOfLastData = new Date(lastSubmittedDataTIme)
+  const lastTime = paresedTime[0]?.days.at(-1).at;
+
+  const serverTimeOfLastData = new Date(lastTime)
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
@@ -62,7 +65,7 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  const parsedServerTime = response[0]?.days.at(-1).at;
+  // const parsedServerTime = response[0]?.days.at(-1).at;
 
   // convert time to local time
   //const parsedLocalTime = new Date(parsedServerTime).toLocaleString();
@@ -78,7 +81,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      lastSubmittedDataTIme: parsedServerTime,
+      lastSubmittedDataTIme: JSON.stringify(response),
       session,
       data: stringifiedData,
     },
