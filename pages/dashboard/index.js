@@ -24,13 +24,15 @@ function DashboardPage({ data }) {
   console.log(currentTime, serverTimeOfLastData, nextDay);
   const { data: session, status } = useSession();
 
+  const userId = parsedData[0]?._id;
+
   return (
     <div>
       <Head>
         <title>Dashboard</title>
       </Head>
 
-      <DashboardLayout>
+      <DashboardLayout id={userId}>
         <DashboardAdmin
           serverTimeOfLastData={serverTimeOfLastData}
           nextDay={nextDay}

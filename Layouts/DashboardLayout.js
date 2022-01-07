@@ -1,7 +1,10 @@
 import { getGreetingBasedOnTime } from '@/helpers/time';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
-function DashboardLayout({ children }) {
+function DashboardLayout({ children, id }) {
+  const router = useRouter();
+
   const greeting = getGreetingBasedOnTime();
   const { data: session, status } = useSession();
   // console.log(session);
@@ -22,6 +25,28 @@ function DashboardLayout({ children }) {
           </button>
           <button className="nav-button">GitHub</button>
         </div>
+      </div>
+
+      {/* navigation */}
+      <div className="flex space-x-4">
+        <button
+          className="bg-gradient-to-r from-red-300 to-lime-600 px-4 py-2"
+          onClick={() => router.push('/dashboard')}
+        >
+          Dashboard
+        </button>
+        <button
+          className="bg-gradient-to-r from-red-300 to-lime-600 px-4 py-2"
+          onClick={() => router.push('/dashboard/progress-so-far')}
+        >
+          Progress
+        </button>
+        <button
+          className="bg-gradient-to-r from-red-300 to-lime-600 px-4 py-2"
+          onClick={() => router.push(`/profile/{id}`)}
+        >
+          Profile
+        </button>
       </div>
 
       {children}

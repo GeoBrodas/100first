@@ -5,7 +5,11 @@ function LastSubmission({ data, nextDay }) {
 
   const { day, day_report, project_link, time } = recentSubmissions;
 
-  const links = project_link.split(',');
+  let links;
+  if (project_link) {
+    links = project_link.split(',');
+  }
+
   console.log(links);
 
   return (
@@ -18,7 +22,7 @@ function LastSubmission({ data, nextDay }) {
         <p className="text-2xl font-medium">Day {day} submission</p>
         <p className="text-xl font-light">You spent {formatTime(time)}</p>
         <p className="text-lg">{day_report}</p>
-        {links.length !== 0 && (
+        {project_link && (
           <div className="flex flex-col bg-white text-CustomDark w-fit px-6 py-2 my-2 rounded-md">
             <p className="text-lg font-semibold">Projects deployed 🚀</p>
             {links.map((link, index) => (
