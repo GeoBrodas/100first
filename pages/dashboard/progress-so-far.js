@@ -72,7 +72,6 @@ function ProgressPage({ data }) {
   );
 }
 
-// getServerSideProps -> do authentication as well
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
