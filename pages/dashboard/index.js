@@ -50,15 +50,6 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
   // checks for the incoming request and sees whether a session token is available or not and accordingly takes action
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/auth/sign-in',
-        permanent: false, // if we want to permanently redirect to auth page or not ?
-      },
-    };
-  }
-
   const client = await connectToDb();
 
   const db = client.db();
@@ -67,6 +58,15 @@ export async function getServerSideProps(context) {
     .collection('user_data')
     .find({ email: session.user.email })
     .toArray();
+
+  if (!session && response[0].email !== session.user.email) {
+    return {
+      redirect: {
+        destination: '/auth/sign-in',
+        permanent: false, // if we want to permanently redirect to auth page or not ?
+      },
+    };
+  }
 
   const stringifiedData = JSON.stringify(response);
 

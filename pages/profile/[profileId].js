@@ -3,18 +3,33 @@ import AuthenticatedComponent from '@/components/PageComponents/Profile/Authenti
 import PublicComponent from '@/components/PageComponents/Profile/PublicComponent';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { connectToDb } from 'lib/mongodb';
+import { ObjectId } from 'mongodb';
 import { useSession } from 'next-auth/react';
+import Head from 'next/head';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 function ProfilePage({ profileId, data }) {
-  console.log(data);
   const { data: session, status } = useSession();
+  const parsedData = JSON.parse(data);
+
+  const { days, email, _id } = parsedData[0];
 
   return (
     <DashboardLayout>
+      <Head>
+        <title>Profile | {session?.user.name}</title>
+      </Head>
+
       <NavigationBar id={profileId} />
       <h3>Hello {profileId}</h3>
 
-      {session ? <AuthenticatedComponent /> : <PublicComponent />}
+      {status === 'loading' ? (
+        <AiOutlineLoading className="animate-spin text-white" />
+      ) : session ? (
+        <AuthenticatedComponent />
+      ) : (
+        <PublicComponent />
+      )}
     </DashboardLayout>
   );
 }
@@ -28,11 +43,10 @@ export async function getServerSideProps(context) {
 
   const response = await db
     .collection('user_data')
-    .find({ _id: profileId })
+    .find({ _id: ObjectId(profileId) })
     .toArray();
 
   const stringifyData = JSON.stringify(response);
-  console.log(stringifyData);
 
   client.close();
 
