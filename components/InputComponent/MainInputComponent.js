@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 function MainInputComponent({
   day,
@@ -10,6 +11,8 @@ function MainInputComponent({
 }) {
   const [day_report, setDayReport] = useState('');
   const [project_link, setProjectLink] = useState('');
+
+  const router = useRouter();
 
   const time = new Date().toLocaleString().split(',')[0].split('/')[1];
 
@@ -80,6 +83,8 @@ function MainInputComponent({
     setDayReport('');
     setProjectLink('');
     setFinalTime('');
+
+    router.push('/dashboard/progress-so-far');
   }
 
   function disabledHandler() {
