@@ -1,4 +1,5 @@
 import DashboardAdmin from '@/components/PageComponents/Dashboard/DashboardAdmin';
+import NavigationBar from '@/components/PageComponents/NavigationBar';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { connectToDb } from 'lib/mongodb';
 import { findIfNextDay } from 'lib/time';
@@ -32,7 +33,8 @@ function DashboardPage({ data }) {
         <title>Dashboard</title>
       </Head>
 
-      <DashboardLayout id={userId}>
+      <DashboardLayout>
+        <NavigationBar id={userId} />
         <DashboardAdmin
           serverTimeOfLastData={serverTimeOfLastData}
           nextDay={nextDay}

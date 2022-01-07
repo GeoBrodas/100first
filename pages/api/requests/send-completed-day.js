@@ -1,9 +1,8 @@
 import { connectToDb } from 'lib/mongodb';
 import { Timestamp } from 'mongodb';
+import { getSession } from 'next-auth/react';
 
 async function handler(req, res) {
-  // res.send('Hello World');
-
   if (req.method === 'POST') {
     // protect API routes from unauthenticated users
     if (req.query.API_ROUTE_KEY !== process.env.NEXT_PUBLIC_API_ROUTE_KEY) {

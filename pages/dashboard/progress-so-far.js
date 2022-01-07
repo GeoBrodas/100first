@@ -1,3 +1,4 @@
+import NavigationBar from '@/components/PageComponents/NavigationBar';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { connectToDb } from 'lib/mongodb';
 import { formatTime } from 'lib/time';
@@ -8,12 +9,15 @@ import { Fade } from 'react-awesome-reveal';
 function ProgressPage({ data }) {
   const parsedData = JSON.parse(data);
   const days = parsedData[0].days;
+  const userId = parsedData[0]._id;
 
   return (
     <DashboardLayout>
       <Head>
         <title>Progress so far</title>
       </Head>
+
+      <NavigationBar id={userId} />
 
       <div className="my-6 items-center">
         <p className="w-2/3 my-4 mx-auto bg-gradient-to-r bg-clip-text text-transparent from-red-200 via-amber-300 to-orange-300 text-center font-bold h-20 text-4xl">
