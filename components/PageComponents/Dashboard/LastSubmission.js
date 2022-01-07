@@ -3,7 +3,7 @@ import { formatTime } from 'lib/time';
 function LastSubmission({ data, nextDay }) {
   const recentSubmissions = data[0].days.at(-1);
 
-  const { day, day_report, project_link, duration } = recentSubmissions;
+  const { day, day_report, project_link, time } = recentSubmissions;
 
   let links;
   if (project_link) {
@@ -20,7 +20,7 @@ function LastSubmission({ data, nextDay }) {
 
       <div className="w-2/3 mx-auto">
         <p className="text-2xl font-medium">Day {day} submission</p>
-        <p className="text-xl font-light">You spent {formatTime(duration)}</p>
+        <p className="text-xl font-light">You spent {formatTime(time)}</p>
         <p className="text-lg">{day_report}</p>
         {project_link && (
           <div className="flex flex-col bg-white text-CustomDark w-fit px-6 py-2 my-2 rounded-md">
