@@ -1,26 +1,29 @@
-function ProfilePage() {
+import { connectToDb } from 'lib/mongodb';
+
+function ProfilePage({ profileId }) {
   return (
     <div>
-      <h3>Hello Profile</h3>
+      <h3>Hello {profileId}</h3>
     </div>
   );
 }
 
-getStaticPaths;
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { profileId: '1' } },
-      { params: { profileId: '2' } },
-      { params: { profileId: '3' } },
-    ],
-    fallback: false,
-  };
-}
+export async function getServerSideProps(context) {
+  const { profileId } = context.query;
 
-export async function getStaticProps(context) {
+  const client = await connectToDb();
+
+  const db = client.db();
+
+  const response = await db
+    .collection('user_data')
+    .find({ id: profileId })
+    .toArray();
+
+  console.log(response);
+
   return {
-    props: { words: ['Hello'] },
+    props: { profileId },
   };
 }
 

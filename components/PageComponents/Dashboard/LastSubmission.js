@@ -10,8 +10,6 @@ function LastSubmission({ data, nextDay }) {
     links = project_link.split(',');
   }
 
-  console.log(links);
-
   return (
     <div className="flex space-y-4 bg-gradient-to-r py-6 mb-10 from-orange-300 rounded-md to-amber-200 flex-col w-full md:w-2/3 mx-auto items-center">
       <h2 className="w-2/3 text-3xl font-semibold text-CustomDark">
