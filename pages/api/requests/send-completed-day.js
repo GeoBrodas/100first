@@ -66,7 +66,7 @@ async function handler(req, res) {
           $push: {
             days: {
               at: Date.now(),
-              duration: time,
+              time: time,
               day,
               day_report,
               project_link,

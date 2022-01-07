@@ -7,8 +7,9 @@ import { Fade } from 'react-awesome-reveal';
 
 function ProgressPage({ data }) {
   const parsedData = JSON.parse(data);
-  console.log(parsedData);
   const days = parsedData[0].days;
+
+  console.log(days);
 
   return (
     <DashboardLayout>
@@ -26,8 +27,8 @@ function ProgressPage({ data }) {
           let links = day.project_link.split(',');
 
           return (
-            <Fade key={index} cascade>
-              <div className="flex flex-col rounded-md bg-CustomGreen w-1/3 py-6 mx-auto px-6 justify-center">
+            <Fade key={index} cascade="true">
+              <div className="flex flex-col rounded-md bg-CustomGreen w-1/3 py-6 mx-auto mb-4 px-6 justify-center">
                 <div className="">
                   <p className="text-2xl text-right font-bold">Day {day.day}</p>
                   <p className="text-xl text-right font-normal">
