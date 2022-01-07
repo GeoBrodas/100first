@@ -95,7 +95,8 @@ export async function getServerSideProps(context) {
   }
 
   const stringifiedData = JSON.stringify(data);
-  console.log(stringifiedData);
+
+  client.close();
 
   return {
     props: {
