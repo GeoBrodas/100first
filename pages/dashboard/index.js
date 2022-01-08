@@ -5,8 +5,19 @@ import { connectToDb } from 'lib/mongodb';
 import { findIfNextDay } from 'lib/time';
 import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 function DashboardPage({ data }) {
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return (
+      <div className="mx-auto grid place-content-center my-10">
+        <AiOutlineLoading className="text-white h-14 w-14" />
+      </div>
+    );
+  }
+
   const parsedData = JSON.parse(data);
 
   const currentTime = new Date(Date.now())
@@ -22,8 +33,7 @@ function DashboardPage({ data }) {
     .split('/')[1];
 
   const nextDay = findIfNextDay(currentTime, serverTimeOfLastData);
-  console.log(currentTime, serverTimeOfLastData, nextDay);
-  const { data: session, status } = useSession();
+  // console.log(currentTime, serverTimeOfLastData, nextDay);
 
   const userId = parsedData[0]?._id;
 
