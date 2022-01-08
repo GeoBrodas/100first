@@ -16,7 +16,14 @@ function DashboardLayout({ children }) {
 
         {/* create links for sign-out */}
         <div className="flex space-x-2">
-          <button className="nav-button" onClick={signOut}>
+          <button
+            className="nav-button"
+            onClick={() =>
+              signOut({
+                callbackUrl: '/',
+              })
+            }
+          >
             Sign out
           </button>
           <button className="nav-button">GitHub</button>
