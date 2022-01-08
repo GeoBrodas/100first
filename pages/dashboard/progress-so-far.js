@@ -84,10 +84,19 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  if (!session && data[0].email !== session.user.email) {
+  if (!session) {
     return {
       redirect: {
         destination: '/auth/sign-in',
+        permanent: false,
+      },
+    };
+  }
+
+  if (data[0].email !== session.user.email) {
+    return {
+      redirect: {
+        destination: '/dashboard',
         permanent: false,
       },
     };

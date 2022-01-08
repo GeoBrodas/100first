@@ -71,7 +71,7 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  if (!session && response[0].email !== session.user.email) {
+  if (!session) {
     return {
       redirect: {
         destination: '/auth/sign-in',
