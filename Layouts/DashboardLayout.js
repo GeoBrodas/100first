@@ -29,7 +29,7 @@ function DashboardLayout({ children }) {
           <button className="nav-button">GitHub</button>
           <a
             className="nav-button w-auto whitespace-nowrap"
-            href="https://discord.gg/qnNPTP6Q"
+            href="https://discord.gg/zqCnbF8eeQ"
             target="_blank"
             rel="noreferrer"
           >

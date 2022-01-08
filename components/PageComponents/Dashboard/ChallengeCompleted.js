@@ -38,7 +38,7 @@ function ChallengeCompleted({ profileId }) {
         </Link>
         <a
           className="bg-white flex justify-center items-center text-center hover-animation-btn text-CustomDark font-semibold p-2 rounded-md "
-          href="https://discord.gg/qnNPTP6Q"
+          href="https://discord.gg/zqCnbF8eeQ"
           target="_blank"
           rel="noreferrer"
         >

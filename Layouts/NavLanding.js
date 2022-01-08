@@ -50,7 +50,7 @@ function NavLanding({ children }) {
 
           <a
             className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-auto"
-            href="https://discord.gg/qnNPTP6Q"
+            href="https://discord.gg/zqCnbF8eeQ"
             target="_blank"
             rel="noreferrer"
           >
