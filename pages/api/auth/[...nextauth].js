@@ -7,6 +7,7 @@ export default NextAuth({
   },
   pages: {
     signIn: '/auth/sign-in',
+    error: '/auth/error',
   },
   providers: [
     GithubProvider({

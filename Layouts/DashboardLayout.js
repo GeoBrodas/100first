@@ -20,7 +20,7 @@ function DashboardLayout({ children }) {
             className="nav-button"
             onClick={() =>
               signOut({
-                callbackUrl: '/',
+                callbackUrl: '/auth/sign-in',
               })
             }
           >

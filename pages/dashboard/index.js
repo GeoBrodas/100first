@@ -12,11 +12,11 @@ function DashboardPage({ data }) {
 
   if (status === 'loading') {
     return (
-      <div className="mx-auto grid place-content-center my-10">
+      <div className="mx-auto grid place-content-center h-screen my-10">
         <Head>
           <title>Dashboard</title>
         </Head>
-        <AiOutlineLoading className="text-white h-14 w-14" />
+        <AiOutlineLoading className="text-white h-14 w-14 animate-spin" />
       </div>
     );
   }
@@ -62,6 +62,15 @@ function DashboardPage({ data }) {
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/sign-in',
+        permanent: false,
+      },
+    };
+  }
+
   const client = await connectToDb();
 
   const db = client.db();
@@ -70,15 +79,6 @@ export async function getServerSideProps(context) {
     .collection('user_data')
     .find({ email: session.user.email })
     .toArray();
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
 
   const stringifiedData = JSON.stringify(response);
 

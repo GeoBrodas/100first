@@ -75,15 +75,6 @@ function ProgressPage({ data }) {
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
-  const client = await connectToDb();
-
-  const db = client.db();
-
-  const data = await db
-    .collection('user_data')
-    .find({ email: session.user.email })
-    .toArray();
-
   if (!session) {
     return {
       redirect: {
@@ -92,6 +83,15 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  const client = await connectToDb();
+
+  const db = client.db();
+
+  const data = await db
+    .collection('user_data')
+    .find({ email: session.user.email })
+    .toArray();
 
   if (data[0].email !== session.user.email) {
     return {
