@@ -23,6 +23,8 @@ function DashboardPage({ data }) {
 
   const parsedData = JSON.parse(data);
 
+  const dayCount = parsedData[0].days.length;
+
   const currentTime = new Date(Date.now())
     .toLocaleString()
     .split(',')[0]
@@ -49,6 +51,8 @@ function DashboardPage({ data }) {
       <DashboardLayout>
         <NavigationBar id={userId} />
         <DashboardAdmin
+          profileId={userId}
+          dayCount={dayCount}
           serverTimeOfLastData={serverTimeOfLastData}
           nextDay={nextDay}
           email={session?.user.email}

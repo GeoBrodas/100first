@@ -27,6 +27,14 @@ function DashboardLayout({ children }) {
             Sign out
           </button>
           <button className="nav-button">GitHub</button>
+          <a
+            className="nav-button w-auto whitespace-nowrap"
+            href="https://discord.gg/qnNPTP6Q"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Join Discord
+          </a>
         </div>
       </div>
 
