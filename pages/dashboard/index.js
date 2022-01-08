@@ -13,6 +13,9 @@ function DashboardPage({ data }) {
   if (status === 'loading') {
     return (
       <div className="mx-auto grid place-content-center my-10">
+        <Head>
+          <title>Dashboard</title>
+        </Head>
         <AiOutlineLoading className="text-white h-14 w-14" />
       </div>
     );
