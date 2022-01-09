@@ -7,6 +7,7 @@
 ---
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
 ## 🔗 Links
 
