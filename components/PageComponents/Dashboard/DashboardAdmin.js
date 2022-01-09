@@ -1,10 +1,10 @@
 import MainInputComponent from '@/components/InputComponent/MainInputComponent';
 import MainTimerBody from '@/components/Timer/MainTimerBody';
 import { formatTime } from 'lib/time';
-import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { GiPartyPopper } from 'react-icons/gi';
+import { MdSkipNext } from 'react-icons/md';
 import ChallengeCompleted from './ChallengeCompleted';
 import LastSubmission from './LastSubmission';
 
@@ -34,20 +34,26 @@ function DashboardAdmin({
       <div className="flex space-x-4 bg-[#c9e265] w-fit py-2 px-4 rounded-md items-center">
         {dayCount === 100 ? (
           <div className="flex space-x-2">
-            <h2 className="text-xl text-pink-800 font-bold">
+            <h2 className="text-lg md:text-xl text-pink-800 font-bold">
               Challenge completed!
             </h2>
-            <GiPartyPopper className="h-6 w-6 text-pink-800" />
+            <GiPartyPopper className="h-4 w-4 md:h-6 md:w-6 text-pink-800" />
           </div>
         ) : (
           <Fragment>
             <h1
               suppressHydrationWarning
-              className="text-xl font-light py-1 px-2 rounded-md bg-emerald-100"
+              className="text-lg flex items-center whitespace-nowrap md:text-xl font-normal py-1 px-2 rounded-md bg-emerald-100"
             >
-              {!nextDay && 'Next ->'} Day {day}/100
+              {!nextDay && (
+                <MdSkipNext className="mr-2 text-CustomDark h-8 w-8" />
+              )}{' '}
+              Day {day}/100
             </h1>
-            <h3 suppressHydrationWarning className="font-normal text-lg">
+            <h3
+              suppressHydrationWarning
+              className="font-normal text-base md:text-lg"
+            >
               {nextDay
                 ? 'You have not started todays session yet'
                 : 'Come back tomorrow to start a new session'}
@@ -60,7 +66,9 @@ function DashboardAdmin({
         <ChallengeCompleted profileId={profileId} />
       ) : (
         <Fragment>
-          <MainTimerBody finalTime={finalTime} setFinalTime={setFinalTime} />
+          {nextDay && (
+            <MainTimerBody finalTime={finalTime} setFinalTime={setFinalTime} />
+          )}
 
           {finalTime && (
             <Fade>
@@ -70,14 +78,16 @@ function DashboardAdmin({
             </Fade>
           )}
 
-          <MainInputComponent
-            serverTimeOfLastData={serverTimeOfLastData}
-            isNextDay={nextDay}
-            setFinalTime={setFinalTime}
-            finalTime={finalTime}
-            email={email}
-            day={day}
-          />
+          {nextDay && (
+            <MainInputComponent
+              serverTimeOfLastData={serverTimeOfLastData}
+              isNextDay={nextDay}
+              setFinalTime={setFinalTime}
+              finalTime={finalTime}
+              email={email}
+              day={day}
+            />
+          )}
 
           {data[0]?.days.length !== 0 && (
             <LastSubmission nextDay={nextDay} data={data} />

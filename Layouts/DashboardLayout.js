@@ -15,7 +15,7 @@ function DashboardLayout({ children }) {
         </p>
 
         {/* create links for sign-out */}
-        <div className="flex space-x-2">
+        <div className="hidden md:inline-flex space-x-2">
           <button
             className="nav-button"
             onClick={() =>
@@ -29,7 +29,7 @@ function DashboardLayout({ children }) {
           <button className="nav-button">GitHub</button>
           <a
             className="nav-button w-auto whitespace-nowrap"
-            href="https://discord.gg/zqCnbF8eeQ"
+            href="https://discord.gg/qr6mDan55G"
             target="_blank"
             rel="noreferrer"
           >

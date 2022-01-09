@@ -21,7 +21,7 @@ function ProgressPage({ data }) {
   const [delay] = useTimeout(4000);
 
   const isComplete = () => {
-    if (no === 100) {
+    if (days.length === 100) {
       return true;
     } else return false;
   };
@@ -41,19 +41,19 @@ function ProgressPage({ data }) {
       <div className="my-6 items-center">
         {isComplete() ? (
           <div className="bg-gradient-to-r my-10 from-blue-400 via-purple-500 to-red-300 flex items-center w-fit h-20 mx-auto rounded-md">
-            <p className="mx-8 text-center text-4xl h-auto text-slate-100 font-bold flex">
+            <p className="mx-8 text-center text-2xl md:text-4xl whitespace-nowrap h-auto text-slate-100 font-bold flex">
               #100daysofcode complete!{' '}
               <GiPartyPopper className="text-white h-auto w-auto ml-2" />
             </p>
           </div>
         ) : (
-          <p className="w-2/3 my-4 mx-auto bg-gradient-to-r bg-clip-text text-transparent from-red-200 via-amber-300 to-orange-300 text-center font-bold h-20 text-4xl">
+          <p className="w-2/3 my-4 mx-auto text-CustomGreen text-center font-bold h-20 text-4xl">
             Progress till now
           </p>
         )}
 
         {/* map through days */}
-        <Fade cascade>
+        <Fade cascade delay={1000} triggerOnce damping={1.5}>
           {days.reverse().map((day, index) => {
             let links = day.project_link.split(',');
 

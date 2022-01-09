@@ -19,7 +19,7 @@ function NavigationBar({ id }) {
       </button>
       <button
         className="bg-pink-400 md:hover:scale-105 transition ease-in-out duration-75 rounded-md text-white font-semibold px-4 py-2"
-        onClick={() => router.push(`/profile/${id}`)}
+        onClick={() => router.push(`/dashboard/edit-profile`)}
       >
         Profile
       </button>

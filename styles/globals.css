@@ -19,6 +19,10 @@
     @apply bg-gradient-to-r from-purple-200 to-orange-200 bg-clip-text text-transparent;
   }
 
+  .bg-gradient-1 {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-red-300;
+  }
+
   .timer-dial {
     @apply p-3 bg-CustomGreen text-black text-center text-xl font-bold rounded-full h-14 w-14;
   }
@@ -29,6 +33,10 @@
 
   .input-custom {
     @apply p-2 rounded-md border-2 focus:outline-none focus:border-CustomDark;
+  }
+
+  .input-custom-social {
+    @apply focus:border-CustomDark focus:border-r-2;
   }
 
   .hover-gradient-bg {

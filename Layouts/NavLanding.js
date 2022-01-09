@@ -21,8 +21,8 @@ function NavLanding({ children }) {
           />
         </div>
 
-        {/* Sign-In and GitHub */}
-        <div className="flex space-x-2 md:space-x-6 items-center w-auto">
+        {/* Sign-In and GitHub  (medium and up) */}
+        <div className="hidden md:inline-flex space-x-2 md:space-x-6 items-center w-auto">
           {/* render only if not authenticated */}
           {!session ? (
             <button className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-10 md:w-20">
@@ -50,7 +50,7 @@ function NavLanding({ children }) {
 
           <a
             className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-auto"
-            href="https://discord.gg/zqCnbF8eeQ"
+            href="https://discord.gg/qr6mDan55G"
             target="_blank"
             rel="noreferrer"
           >
