@@ -1,3 +1,4 @@
+import HamMenu from '@/components/ui/HamMenu';
 import { getGreetingBasedOnTime } from '@/helpers/time';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -26,7 +27,13 @@ function DashboardLayout({ children }) {
           >
             Sign out
           </button>
-          <button className="nav-button">GitHub</button>
+          <a
+            href="https://github.com/GeoBrodas/100first"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <button className="nav-button">GitHub</button>
+          </a>
           <a
             className="nav-button w-auto whitespace-nowrap"
             href="https://discord.gg/qr6mDan55G"
@@ -36,6 +43,9 @@ function DashboardLayout({ children }) {
             Join Discord
           </a>
         </div>
+
+        {/* Mobile view  */}
+        <HamMenu />
       </div>
 
       {children}

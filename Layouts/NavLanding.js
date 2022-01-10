@@ -1,3 +1,4 @@
+import HamMenuLanding from '@/components/ui/HamMenuLanding';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,7 +8,7 @@ function NavLanding({ children }) {
   const { data: session, status } = useSession();
 
   return (
-    <div className="w-full px-3 md:px-10">
+    <div className="w-full px-6 md:px-10">
       <div className="flex pt-10 flex-row justify-between">
         {/* Logo :: Sign-In : GitHub */}
 
@@ -57,6 +58,9 @@ function NavLanding({ children }) {
             Join Discord
           </a>
         </div>
+
+        {/* Mobile menu */}
+        <HamMenuLanding />
       </div>
       {children}
     </div>

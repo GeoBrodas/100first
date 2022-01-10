@@ -1,7 +1,9 @@
 import { getProviders, getSession, signIn } from 'next-auth/react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { AiFillGithub } from 'react-icons/ai';
+import { MdHomeFilled, MdLeaderboard } from 'react-icons/md';
 
 function SignInPage({ providers }) {
   return (
@@ -12,16 +14,16 @@ function SignInPage({ providers }) {
 
       {/* <button>Sign In</button> */}
       <div className="bg-white rounded-lg shadow-lg p-3 md:p-5 w-3/4 md:w-1/2 mx-auto flex flex-col md:flex-row justify-around">
-        <div className="text-center py-4 w-full md:w-1/3">
+        <div className="text-center py-4 w-full md:w-2/4">
           <p className="text-lg">
             100First is a web application build to track your{' '}
             <b className="bg-gradient-to-r from-orange-600 to-violet-700 bg-clip-text text-transparent">
               #100daysofcode
             </b>{' '}
             challenge. 100First lets you document your journey through each day
-            and motivating at each step. You can also share your list with your
-            friends on social networks to support them in their journey towards
-            learning programming languages.
+            and motivating at each step. You can also share your profile with
+            your friends on social networks to support them in their journey
+            towards learning programming languages.
           </p>
         </div>
 
@@ -44,6 +46,19 @@ function SignInPage({ providers }) {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mx-auto space-x-4 p-2 mt-4 rounded-md flex">
+        <Link href="/">
+          <a className="flex items-center md:hover-animation-btn bg-gradient-2 p-2 rounded-md text-white">
+            <MdHomeFilled className="mr-2" /> Home
+          </a>
+        </Link>
+        <Link href="/leaderboard">
+          <a className="flex items-center md:hover-animation-btn bg-gradient-2 p-2 rounded-md text-white">
+            <MdLeaderboard className="mr-2" /> Leaderboard (Coming soon..)
+          </a>
+        </Link>
       </div>
     </div>
   );
