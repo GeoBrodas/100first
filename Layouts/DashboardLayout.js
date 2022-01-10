@@ -14,7 +14,7 @@ function DashboardLayout({ children }) {
           <span className="text-white">{session && session.user.name} !</span>
         </p>
 
-        {/* create links for sign-out */}
+        {/* create links for sign-out -> desktop view */}
         <div className="hidden md:inline-flex space-x-2">
           <button
             className="nav-button"

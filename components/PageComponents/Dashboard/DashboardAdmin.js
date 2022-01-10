@@ -89,8 +89,16 @@ function DashboardAdmin({
             />
           )}
 
-          {data[0]?.days.length !== 0 && (
+          {data[0]?.days.length !== 0 ? (
             <LastSubmission nextDay={nextDay} data={data} />
+          ) : (
+            <p className="text-center w-full mx-auto py-6 font-bold rounded-b-3xl md:w-2/3 mb-10 bg-gradient-to-r from-orange-300 to-amber-200 text-lg md:text-xl">
+              Make you first submission today, and start the{' '}
+              <span className="font-extrabold text-gradient-2">
+                #100daysofcode
+              </span>{' '}
+              challenge!
+            </p>
           )}
         </Fragment>
       )}

@@ -44,6 +44,7 @@ async function handler(req, res) {
 
     let response;
 
+    // if array is empty -> then check if user exists in db -> if exists then updateOne else insertOne
     if (userData.length === 0) {
       // add the timestamp to the document as well using $currentDate
       response = await db.collection('user_data').insertOne({

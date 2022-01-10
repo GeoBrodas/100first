@@ -19,6 +19,10 @@
     @apply bg-gradient-to-r from-purple-200 to-orange-200 bg-clip-text text-transparent;
   }
 
+  .text-gradient-2 {
+    @apply bg-gradient-to-r from-blue-700 via-orange-700 to-teal-600 bg-clip-text text-transparent;
+  }
+
   .bg-gradient-1 {
     @apply bg-gradient-to-r from-blue-400 via-purple-500 to-red-300;
   }

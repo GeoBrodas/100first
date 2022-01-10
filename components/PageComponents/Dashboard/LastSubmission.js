@@ -11,7 +11,7 @@ function LastSubmission({ data, nextDay }) {
   }
 
   return (
-    <div className="flex mt-10 space-y-4 bg-gradient-to-r py-6 mb-10 from-orange-300 rounded-md to-amber-200 flex-col w-full md:w-2/3 mx-auto items-center">
+    <div className="flex mt-10 space-y-4 bg-gradient-to-r py-6 mb-10 from-orange-300 rounded-b-3xl to-amber-200 flex-col w-full md:w-2/3 mx-auto items-center">
       <h2 className="w-2/3 text-2xl md:text-3xl font-semibold text-CustomDark">
         {nextDay ? 'Yesterdays submission' : 'Todays submission'}
       </h2>

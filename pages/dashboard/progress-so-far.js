@@ -53,7 +53,7 @@ function ProgressPage({ data }) {
         )}
 
         {/* map through days */}
-        <Fade cascade delay={1000} triggerOnce damping={1.5}>
+        <Fade cascade delay={1000} triggerOnce>
           {days.reverse().map((day, index) => {
             let links = day.project_link.split(',');
 

@@ -1,26 +1,29 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiSaveArrow } from 'react-icons/gi';
 import NormalInput from './NormalInput';
 import SocialLink from './SocialLink';
 
-function MainEditingArea({ sessionData }) {
-  const { name, image } = sessionData?.user;
+function MainEditingArea({ sessionData, prevUserData }) {
+  const { name, image, email } = sessionData?.user;
+
+  const { username, bio, githubUsername, twitterUsername, portfolio } =
+    prevUserData;
 
   // set formdata if available in database as well
   const [formData, setFormData] = useState({
-    name: name,
-    bio: '',
-    githubUsername: '',
-    twitterUsername: '',
-    portfolio: '',
+    username: username || name,
     imageUrl: image,
+    bio: bio || '',
+    githubUsername: githubUsername || '',
+    twitterUsername: twitterUsername || '',
+    portfolio: portfolio || '',
   });
 
   // send formData to api route '/api/requests/update-profile'
-  function updateProfile() {
+  async function updateProfile() {
     // check if formdata.name is empty
-    if (formData.name === '') {
+    if (formData.username === '') {
       alert('Please enter your name');
       return;
     }
@@ -37,8 +40,14 @@ function MainEditingArea({ sessionData }) {
       return;
     }
 
+    // if bio is too long, throw error
+    if (formData.bio.length > 200) {
+      alert('Your bio is too long');
+      return;
+    }
+
     // make fetch request with query param NEXT_PUBLIC_API_ROUTE_KEY
-    fetch(
+    await fetch(
       `/api/requests/update-profile?API_ROUTE_KEY=${process.env.NEXT_PUBLIC_API_ROUTE_KEY}`,
       {
         method: 'POST',
@@ -46,12 +55,8 @@ function MainEditingArea({ sessionData }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          bio: formData.bio,
-          githubUsername: formData.githubUsername,
-          twitterUsername: formData.twitterUsername,
-          portfolio: formData.portfolio,
-          imageUrl: formData.imageUrl,
+          ...formData,
+          email,
         }),
       }
     )
@@ -59,7 +64,11 @@ function MainEditingArea({ sessionData }) {
         if (res.status === 200) {
           alert('Success');
         } else {
-          alert(res.statusText);
+          if (res.statusText === 'Bad Request') {
+            alert('Please fill in all fields');
+          } else {
+            alert('Something went wrong');
+          }
         }
       })
       .catch((err) => {
@@ -68,7 +77,7 @@ function MainEditingArea({ sessionData }) {
   }
 
   function disabledHandler() {
-    return !formData.name || !formData.bio || !formData.githubUsername;
+    return !formData.username || !formData.bio || !formData.githubUsername;
   }
 
   return (
@@ -93,8 +102,8 @@ function MainEditingArea({ sessionData }) {
 
           <NormalInput
             title="Name *"
-            field={'name'}
-            value={formData.name}
+            field={'username'}
+            value={formData.username}
             placeholder="John Doe"
             setFormData={setFormData}
             formData={formData}
