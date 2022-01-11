@@ -1,36 +1,20 @@
-import NavigationBar from '@/components/PageComponents/NavigationBar';
-import AuthenticatedComponent from '@/components/PageComponents/Profile/AuthenticatedComponent';
-import PublicComponent from '@/components/PageComponents/Profile/PublicComponent';
-import DashboardLayout from '@/Layouts/DashboardLayout';
+import NavLanding from '@/Layouts/NavLanding';
 import { connectToDb } from 'lib/mongodb';
 import { ObjectId } from 'mongodb';
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import { AiOutlineLoading } from 'react-icons/ai';
 
 function ProfilePage({ profileId, data }) {
-  const { data: session, status } = useSession();
   const parsedData = JSON.parse(data);
 
-  const { days, email, _id } = parsedData[0];
+  console.log(parsedData);
 
   return (
-    <DashboardLayout>
+    <NavLanding>
       <Head>
         <title>Profile | {session?.user.name}</title>
       </Head>
-
-      <NavigationBar id={profileId} />
       <h3>Hello {profileId}</h3>
-
-      {status === 'loading' ? (
-        <AiOutlineLoading className="animate-spin text-white" />
-      ) : session ? (
-        <AuthenticatedComponent />
-      ) : (
-        <PublicComponent />
-      )}
-    </DashboardLayout>
+    </NavLanding>
   );
 }
 
@@ -45,6 +29,12 @@ export async function getServerSideProps(context) {
     .collection('user_data')
     .find({ _id: ObjectId(profileId) })
     .toArray();
+
+  if (response.length === 0) {
+    return {
+      fallback: true,
+    };
+  }
 
   const stringifyData = JSON.stringify(response);
 
