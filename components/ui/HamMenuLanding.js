@@ -28,7 +28,7 @@ function HamMenuLanding() {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="absolute bg-CustomGreen border-CustomDark border-2 rounded-b-xl py-4 px-2 w-52 right-0">
+        <div className="absolute z-10 bg-CustomGreen border-CustomDark border-2 rounded-b-xl py-4 px-2 w-52 right-0">
           <div className="flex flex-col space-y-4">
             {session ? (
               <Link href="/dashboard" passHref>

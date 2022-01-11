@@ -1,3 +1,4 @@
+import ProfileComponent from '@/components/PageComponents/Profile/ProfileComponent';
 import NavLanding from '@/Layouts/NavLanding';
 import { connectToDb } from 'lib/mongodb';
 import { ObjectId } from 'mongodb';
@@ -6,20 +7,26 @@ import Head from 'next/head';
 function ProfilePage({ profileId, data }) {
   const parsedData = JSON.parse(data);
 
-  console.log(parsedData);
-
   return (
     <NavLanding>
       <Head>
-        <title>Profile | {session?.user.name}</title>
+        <title>Profile | {parsedData[0].username}</title>
       </Head>
-      <h3>Hello {profileId}</h3>
+
+      {/* Profile Component */}
+      <ProfileComponent userData={parsedData[0]} />
     </NavLanding>
   );
 }
 
 export async function getServerSideProps(context) {
   const { profileId } = context.query;
+
+  if (profileId.length !== 24) {
+    return {
+      notFound: true,
+    };
+  }
 
   const client = await connectToDb();
 

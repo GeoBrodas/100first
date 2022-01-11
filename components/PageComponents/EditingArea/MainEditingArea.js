@@ -1,13 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { GiSaveArrow } from 'react-icons/gi';
+import { MdClose } from 'react-icons/md';
 import NormalInput from './NormalInput';
 import SocialLink from './SocialLink';
 
 function MainEditingArea({ sessionData, prevUserData }) {
   const { name, image, email } = sessionData?.user;
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { username, bio, githubUsername, twitterUsername, portfolio } =
+  const { username, bio, githubUsername, twitterUsername, portfolio, _id } =
     prevUserData;
 
   // set formdata if available in database as well
@@ -22,6 +25,15 @@ function MainEditingArea({ sessionData, prevUserData }) {
 
   // send formData to api route '/api/requests/update-profile'
   async function updateProfile() {
+    if (
+      bio === formData.bio &&
+      username === formData.username &&
+      githubUsername === formData.githubUsername
+    ) {
+      alert('No changes detected in form, avoid sending unecessary requests');
+      return;
+    }
+
     // check if formdata.name is empty
     if (formData.username === '') {
       alert('Please enter your name');
@@ -74,10 +86,20 @@ function MainEditingArea({ sessionData, prevUserData }) {
       .catch((err) => {
         alert(err.response.data.message);
       });
+
+    setIsSubmitted(true);
   }
 
   function disabledHandler() {
-    return !formData.username || !formData.bio || !formData.githubUsername;
+    return (
+      !formData.username ||
+      !formData.bio ||
+      !formData.githubUsername ||
+      isSubmitted ||
+      (username === formData.username &&
+        bio === formData.bio &&
+        githubUsername === formData.githubUsername)
+    );
   }
 
   return (
@@ -152,7 +174,7 @@ function MainEditingArea({ sessionData, prevUserData }) {
       <button
         disabled={disabledHandler()}
         onClick={updateProfile}
-        className="mx-auto disabled:bg-gray-400 ml-12 bg-purple-300 hover:bg-purple-500 rounded-lg hover:hover-animation-btn p-2 mt-6"
+        className="mx-auto disabled:bg-gray-400 ml-9 bg-purple-300 hover:bg-purple-500 rounded-lg hover:hover-animation-btn p-2 mt-6"
       >
         <div className="flex items-center space-x-2">
           <p className="text-white font-bold text-base md:text-lg">
@@ -161,6 +183,32 @@ function MainEditingArea({ sessionData, prevUserData }) {
           <GiSaveArrow className="text-white h-6 w-6" />
         </div>
       </button>
+
+      {isSubmitted && (
+        <div className="bg-white animate-bounce flex justify-between items-center w-2/3 mx-auto px-4 py-2 rounded-lg shadow-xl text-CustomDark mt-8">
+          <div>
+            <p className="text-lg md:text-xl">
+              Your profile has been updated! ✨
+            </p>
+            <p className="text-base md:text-lg">
+              You can now view your profile{' '}
+              <Link href={`/profile/${_id}`}>
+                <a target="_blank" className="underline hover:">
+                  {' '}
+                  here
+                </a>
+              </Link>
+            </p>
+          </div>
+          {/* 
+          <div
+            onClick={() => setIsSubmitted(false)}
+            className="hover:cursor-pointer"
+          >
+            <MdClose className="h-6 w-6 hover:scale-110 transition ease-in-out duration-75" />
+          </div> */}
+        </div>
+      )}
     </div>
   );
 }
