@@ -14,15 +14,17 @@ function NavLanding({ children }) {
       <div className="flex pt-10 flex-row justify-between">
         {/* Logo :: Sign-In : GitHub */}
 
-        <div className="md:hover:scale-105 transition duration-100 ease-in-out">
-          <Image
-            src="/Logo/logo-2.png"
-            alt="logo"
-            layout="fixed"
-            width="150px"
-            height="45px"
-          />
-        </div>
+        <Link href="/" passHref>
+          <div className="md:hover:scale-105 hover:cursor-pointer transition duration-100 ease-in-out">
+            <Image
+              src="/Logo/logo-2.png"
+              alt="logo"
+              layout="fixed"
+              width="150px"
+              height="45px"
+            />
+          </div>
+        </Link>
 
         {/* Sign-In and GitHub  (medium and up) */}
         <div className="hidden md:inline-flex space-x-2 md:space-x-6 items-center w-auto">
@@ -39,7 +41,7 @@ function NavLanding({ children }) {
           )}
 
           {/* GitHub link */}
-          <button className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-24">
+          <button className="text-[#253439] flex items-center text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-24">
             <a
               href="https://github.com/GeoBrodas/100first"
               target="_blank"

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>100first - Complete with focus</title>
+        <title>100first - Track, share, complete the challenge</title>
         {/* description */}
         <meta
           name="description"

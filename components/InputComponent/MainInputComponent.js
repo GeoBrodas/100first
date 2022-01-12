@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 function MainInputComponent({
   day,
@@ -49,6 +50,8 @@ function MainInputComponent({
       return alert('Project link is not valid');
     }
 
+    const toastId = toast.loading('Submitting your challenge...');
+
     // make fetch request to api route '/api/send-completed-day' with API_ROUTE_KEY as query param
     await fetch(
       `/api/requests/send-completed-day?API_ROUTE_KEY=${process.env.NEXT_PUBLIC_API_ROUTE_KEY}`,
@@ -70,13 +73,16 @@ function MainInputComponent({
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          alert('Success');
+          toast.dismiss(toastId);
+          toast.success('Challenge submitted successfully');
         } else {
-          alert(res.statusText);
+          toast.dismiss(toastId);
+          toast.error(res.statusText || 'Something went wrong');
         }
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        toast.dismiss(toastId);
+        toast.error(err.response.data.message || 'Something went wrong');
       });
 
     // clear fields

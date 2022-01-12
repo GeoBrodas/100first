@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { GiSaveArrow } from 'react-icons/gi';
-import { MdClose } from 'react-icons/md';
 import NormalInput from './NormalInput';
 import SocialLink from './SocialLink';
 
@@ -58,6 +58,8 @@ function MainEditingArea({ sessionData, prevUserData }) {
       return;
     }
 
+    const toastId = toast.loading('Updating your profile...');
+
     // make fetch request with query param NEXT_PUBLIC_API_ROUTE_KEY
     await fetch(
       `/api/requests/update-profile?API_ROUTE_KEY=${process.env.NEXT_PUBLIC_API_ROUTE_KEY}`,
@@ -74,17 +76,21 @@ function MainEditingArea({ sessionData, prevUserData }) {
     )
       .then((res) => {
         if (res.status === 200) {
-          alert('Success');
+          toast.dismiss(toastId);
+          toast.success('Profile updated successfully');
         } else {
           if (res.statusText === 'Bad Request') {
-            alert('Please fill in all fields');
+            toast.dismiss(toastId);
+            toast.error('Server detected an error while updating profile');
           } else {
-            alert('Something went wrong');
+            toast.dismiss(toastId);
+            toast.error(res.statusText || 'Something went wrong');
           }
         }
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        toast.dismiss(toastId);
+        toast.error(err.response.data.message || 'Something went wrong');
       });
 
     setIsSubmitted(true);
