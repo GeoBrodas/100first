@@ -3,6 +3,8 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AiFillGithub } from 'react-icons/ai';
+import { BsDiscord } from 'react-icons/bs';
+import { MdDashboard } from 'react-icons/md';
 
 function NavLanding({ children }) {
   const { data: session, status } = useSession();
@@ -30,7 +32,8 @@ function NavLanding({ children }) {
               <Link href="/auth/sign-in">Sign-In</Link>
             </button>
           ) : (
-            <button className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-20 md:h-10 md:w-auto">
+            <button className="text-[#253439] text-sm flex items-center md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-20 md:h-10 md:w-auto">
+              <MdDashboard className="text-CustomDark mr-2 w-5 h-5" />
               <Link href="/dashboard">Dashboard</Link>
             </button>
           )}
@@ -50,11 +53,12 @@ function NavLanding({ children }) {
           </button>
 
           <a
-            className="text-[#253439] text-sm md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-auto"
+            className="text-[#253439] text-sm flex items-center md:text-base font-medium md:hover:scale-105 transition duration-75 ease-in-out p-2 rounded-md bg-[#c9e265] h-9 w-15 md:h-15 md:w-auto"
             href="https://discord.gg/qr6mDan55G"
             target="_blank"
             rel="noreferrer"
           >
+            <BsDiscord className="text-CustomDark mr-2 w-5 h-5" />
             Join Discord
           </a>
         </div>

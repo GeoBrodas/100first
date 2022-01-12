@@ -1,4 +1,5 @@
 import DayReviewComponent from '@/components/ui/DayReviewComponent';
+import { convertToDate } from 'lib/time';
 import Image from 'next/image';
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { MdEmail, MdWork } from 'react-icons/md';
@@ -16,13 +17,18 @@ function ProfileComponent({ userData }) {
   } = userData;
 
   const structuredArray = days.map((day) => ({
+    at: day.at,
     day: day.day,
     projectLink: day.project_link,
     dayReport: day.day_report,
     time: day.time,
   }));
 
-  // console.log(structuredArray);
+  const startDate = structuredArray.at(0).at;
+  const dateArray = convertToDate(startDate).toString().split(' ');
+  const year = dateArray[3];
+  const month = dateArray[1];
+  const day = dateArray[2];
 
   return (
     <div className="md:w-full my-10 flex mx-auto flex-col">
@@ -36,6 +42,12 @@ function ProfileComponent({ userData }) {
           src={imageUrl}
         />
       </div>
+
+      {startDate && (
+        <p className="text-center mt-4 text-gray-200 md:text-lg">
+          Started the challenge on {month} {day} {year}
+        </p>
+      )}
 
       {bio ? (
         <p className="italic text-center my-4 text-white md:text-lg">{bio}</p>
@@ -105,7 +117,7 @@ function ProfileComponent({ userData }) {
                 : days.length >= 3 && 'lg:grid-cols-3'
             }`}
           >
-            {structuredArray.map((day, index) => (
+            {structuredArray.reverse().map((day, index) => (
               <DayReviewComponent
                 key={index}
                 projectLink={day.projectLink}
