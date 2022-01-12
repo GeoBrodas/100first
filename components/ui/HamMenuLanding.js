@@ -52,7 +52,8 @@ function HamMenuLanding() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <BsGithub className="text-CustomDark mr-2 h-5 w-5" /> GitHub
+                <BsGithub className="text-CustomDark mr-2 h-5 w-5" /> Source
+                Code
               </a>
             </button>
             <button className="">

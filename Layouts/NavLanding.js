@@ -112,7 +112,7 @@ function NavLanding({ children }) {
           >
             <BsLinkedin className="text-CustomDark mr-2 w-5 h-5" />
           </a>
-          <a
+          {/* <a
             href="mailto:geobro2310@gmail.com"
             target="_blank"
             rel="noreferrer"
@@ -121,7 +121,7 @@ function NavLanding({ children }) {
           </a>
           <a href="https://georgey.codes" target="_blank" rel="noreferrer">
             <MdOutlineWork className="text-CustomDark mr-2 w-5 h-5" />
-          </a>
+          </a> */}
         </div>
       </footer>
     </Fragment>
