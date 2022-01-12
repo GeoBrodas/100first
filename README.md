@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/public/readme/logo.png" alt="logo" align="center" width="200" height="200" />
+  <img src="/public/readme/1F.png" alt="logo" align="center" width="200" height="200" />
 </p>
 
 <h3 align="center"> 100First - the #100daysofcode tracker! </h3>

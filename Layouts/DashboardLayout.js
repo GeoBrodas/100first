@@ -37,7 +37,7 @@ function DashboardLayout({ children }) {
           >
             <button className="nav-button flex items-center whitespace-nowrap w-auto">
               <BsGithub className="text-CustomDark mr-2 w-5 h-5" />
-              GitHub
+              Source code
             </button>
           </a>
           <a
