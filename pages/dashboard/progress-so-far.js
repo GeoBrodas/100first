@@ -15,7 +15,7 @@ function ProgressPage({ data }) {
   const { width, height } = useWindowSize();
   const [delay] = useTimeout(4000);
 
-  if (parsedData.length === 0) {
+  if (parsedData.length === 0 || parsedData[0].days.length === 0) {
     return (
       <DashboardLayout>
         <Head>
