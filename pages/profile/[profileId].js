@@ -2,10 +2,25 @@ import ProfileComponent from '@/components/PageComponents/Profile/ProfileCompone
 import NavLanding from '@/Layouts/NavLanding';
 import { connectToDb } from 'lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 function ProfilePage({ profileId, data }) {
   const parsedData = JSON.parse(data);
+
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return (
+      <div className="mx-auto grid place-content-center h-screen my-10">
+        <Head>
+          <title>Profile | {parsedData[0].username}</title>
+        </Head>
+        <AiOutlineLoading className="text-white h-14 w-14 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <NavLanding>
