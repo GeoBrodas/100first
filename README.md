@@ -17,7 +17,7 @@
 
 ## A web application for tracking the #100daysofcode challenge!
 
-![cover-image]('/public/readme/cover.png')
+![cover-image](/public/readme/cover.png)
 
 ## Features
 
