@@ -23,7 +23,7 @@
 
 - ⚡ Fast (Made with Next.js ❤)
 - 🔗 Shareable Profile
-- ⚙ PWA - installable as a mobile app
+- ⚙ PWA - installable as a mobile app ( coming soon..)
 - 🌏 Cross platform
 - ⌚ Track time spent each day
 
