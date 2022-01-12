@@ -103,7 +103,9 @@ function MainEditingArea({ sessionData, prevUserData }) {
     setIsSubmitted(true);
 
     if (!_id) {
-      toast.error('Refresh the page to see the live link to your profile');
+      toast.error('Refresh the page to see the live link to your profile', {
+        duration: 5000,
+      });
     }
   }
 

@@ -24,7 +24,7 @@ function ProfileComponent({ userData }) {
     time: day.time,
   }));
 
-  const startDate = structuredArray.at(0).at;
+  const startDate = structuredArray.at(0)?.at;
   const dateArray = convertToDate(startDate).toString().split(' ');
   const year = dateArray[3];
   const month = dateArray[1];
