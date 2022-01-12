@@ -23,14 +23,14 @@ function DashboardPage({ data }) {
 
   const parsedData = JSON.parse(data);
 
-  const dayCount = parsedData[0].days.length;
+  const dayCount = parsedData[0]?.days.length;
 
   const currentTime = new Date(Date.now())
     .toLocaleString()
     .split(',')[0]
     .split('/')[1];
 
-  const lastTime = parsedData[0]?.days.at(-1).at;
+  const lastTime = parsedData[0]?.days.at(-1)?.at;
 
   const serverTimeOfLastData = new Date(lastTime)
     .toLocaleString()
@@ -38,7 +38,7 @@ function DashboardPage({ data }) {
     .split('/')[1];
 
   const nextDay = findIfNextDay(currentTime, serverTimeOfLastData);
-  // console.log(currentTime, serverTimeOfLastData, nextDay);
+  console.log(currentTime, serverTimeOfLastData, nextDay);
 
   const userId = parsedData[0]?._id;
 

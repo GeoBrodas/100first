@@ -1,6 +1,4 @@
 import { connectToDb } from 'lib/mongodb';
-import { Timestamp } from 'mongodb';
-import { getSession } from 'next-auth/react';
 
 async function handler(req, res) {
   if (req.method === 'POST') {
@@ -18,17 +16,9 @@ async function handler(req, res) {
       req.body;
 
     // if no day or day_report provided, return error
-    if (!day || !day_report || !email || !time || !clientLocalTime) {
+    if (!day || !day_report || !email || !time) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
-
-    // check if clientTime is true or false ie: if its next day or not, return error
-    if (clientLocalTime === serverTime) {
-      // error: next submission can be done only tomorrow
-      return res.status(400).json({ message: 'You can only submit tomorrow' });
-    }
-
-    // console.log(day, day_report, project_link, email);
 
     const client = await connectToDb();
 
@@ -38,43 +28,49 @@ async function handler(req, res) {
       .collection('user_data')
       .find({ email: email })
       .toArray();
-    // console.log(userData);
-
-    // res.send('success');
 
     let response;
 
-    // if array is empty -> then check if user exists in db -> if exists then updateOne else insertOne
+    // if user has not submitted their first submission, consider it their first and proceed
     if (userData.length === 0) {
-      // add the timestamp to the document as well using $currentDate
       response = await db.collection('user_data').insertOne({
         email,
         days: [
           {
-            at: Date.now(),
             day,
             day_report,
             project_link,
             time,
+            at: Date.now(),
           },
         ],
       });
-    } else {
-      response = await db.collection('user_data').updateOne(
-        { email },
-        {
-          $push: {
-            days: {
-              at: Date.now(),
-              time: time,
-              day,
-              day_report,
-              project_link,
-            },
-          },
-        }
-      );
+
+      return res.status(200).json({ message: 'Successfully submitted data' });
     }
+
+    // check if clientTime is true or false ie: if its next day or not, return error
+    if (clientLocalTime === serverTime) {
+      // error: next submission can be done only tomorrow
+      return res.status(400).json({ message: 'You can only submit tomorrow' });
+    }
+
+    // if array is empty -> then check if user exists in db -> if exists then updateOne else insertOne
+
+    response = await db.collection('user_data').updateOne(
+      { email },
+      {
+        $push: {
+          days: {
+            at: Date.now(),
+            time: time,
+            day,
+            day_report,
+            project_link,
+          },
+        },
+      }
+    );
 
     client.close();
 

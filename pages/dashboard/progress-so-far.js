@@ -12,13 +12,28 @@ import { GiPartyPopper } from 'react-icons/gi';
 
 function ProgressPage({ data }) {
   const parsedData = JSON.parse(data);
+  const { width, height } = useWindowSize();
+  const [delay] = useTimeout(4000);
+
+  if (parsedData.length === 0) {
+    return (
+      <DashboardLayout>
+        <Head>
+          <title>Progress so far</title>
+        </Head>
+        <NavigationBar />
+        <p className="mx-auto text-CustomDark text-xl font-medium w-2/3 bg-CustomGreen mt-20 rounded-xl p-6 text-center">
+          Looks like you didnt start the challenge yet! Make your first
+          submission today to see your progress.
+        </p>
+      </DashboardLayout>
+    );
+  }
+
   const days = parsedData[0].days;
   const userId = parsedData[0]._id;
 
   let no = 100;
-
-  const { width, height } = useWindowSize();
-  const [delay] = useTimeout(4000);
 
   const isComplete = () => {
     if (days.length === 100) {
@@ -32,7 +47,7 @@ function ProgressPage({ data }) {
         <title>Progress so far</title>
       </Head>
 
-      <NavigationBar id={userId} />
+      <NavigationBar />
 
       {isComplete() && (
         <Confetti width={width - 50} height={height} recycle={!delay()} />
@@ -121,14 +136,14 @@ export async function getServerSideProps(context) {
     .find({ email: session.user.email })
     .toArray();
 
-  if (data[0].email !== session.user.email) {
-    return {
-      redirect: {
-        destination: '/dashboard',
-        permanent: false,
-      },
-    };
-  }
+  // if (data[0].email !== session.user.email) {
+  //   return {
+  //     redirect: {
+  //       destination: '/dashboard',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   const stringifiedData = JSON.stringify(data);
 

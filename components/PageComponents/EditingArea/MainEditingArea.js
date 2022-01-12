@@ -10,8 +10,15 @@ function MainEditingArea({ sessionData, prevUserData }) {
   const { name, image, email } = sessionData?.user;
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { username, bio, githubUsername, twitterUsername, portfolio, _id } =
-    prevUserData;
+  let username, bio, githubUsername, twitterUsername, portfolio, _id;
+
+  if (prevUserData) {
+    ({ username, bio, githubUsername, twitterUsername, portfolio, _id } =
+      prevUserData);
+  }
+
+  // const { username, bio, githubUsername, twitterUsername, portfolio, _id } =
+  //   prevUserData;
 
   // set formdata if available in database as well
   const [formData, setFormData] = useState({
@@ -94,6 +101,10 @@ function MainEditingArea({ sessionData, prevUserData }) {
       });
 
     setIsSubmitted(true);
+
+    if (!_id) {
+      toast.error('Refresh the page to see the live link to your profile');
+    }
   }
 
   function disabledHandler() {
@@ -177,18 +188,28 @@ function MainEditingArea({ sessionData, prevUserData }) {
       </div>
 
       {/* Submit button */}
-      <button
-        disabled={disabledHandler()}
-        onClick={updateProfile}
-        className="mx-auto disabled:bg-gray-400 ml-9 bg-purple-300 hover:bg-purple-500 rounded-lg hover:hover-animation-btn p-2 mt-6"
-      >
-        <div className="flex items-center space-x-2">
-          <p className="text-white font-bold text-base md:text-lg">
-            Save Profile
-          </p>
-          <GiSaveArrow className="text-white h-6 w-6" />
-        </div>
-      </button>
+      <div className="flex justify-between mr-4">
+        <button
+          disabled={disabledHandler()}
+          onClick={updateProfile}
+          className="mx-auto disabled:bg-gray-400 ml-9 bg-purple-300 hover:bg-purple-500 rounded-lg hover:hover-animation-btn p-2 mt-6"
+        >
+          <div className="flex items-center space-x-2">
+            <p className="text-white font-bold text-base md:text-lg">
+              Save Profile
+            </p>
+            <GiSaveArrow className="text-white h-6 w-6" />
+          </div>
+        </button>
+
+        {_id && !isSubmitted && (
+          <button className="text-black block mt-4 rounded-xl hover-animation-btn font-medium ml-10 bg-white p-2">
+            <a href={`/profile/${_id}`} rel="noreferrer" target="_blank">
+              Check your profile here! ✨
+            </a>
+          </button>
+        )}
+      </div>
 
       {isSubmitted && (
         <div className="bg-white animate-bounce flex justify-between items-center w-2/3 mx-auto px-4 py-2 rounded-lg shadow-xl text-CustomDark mt-8">

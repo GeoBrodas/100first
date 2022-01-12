@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-function NavigationBar({ id }) {
+function NavigationBar() {
   const router = useRouter();
 
   return (

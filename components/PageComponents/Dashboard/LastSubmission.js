@@ -1,7 +1,17 @@
 import { formatTime } from 'lib/time';
 
 function LastSubmission({ data, nextDay }) {
-  const recentSubmissions = data[0].days.at(-1);
+  if (data.length === 0) {
+    return (
+      <div className="flex mt-10 space-y-4 bg-gradient-to-r py-6 mb-10 from-orange-300 rounded-b-3xl to-amber-200 flex-col w-full md:w-2/3 mx-auto items-center">
+        <p className="text-lg font-medium">
+          Youre previous submissions appear here, start Day 1 today!
+        </p>
+      </div>
+    );
+  }
+
+  const recentSubmissions = data[0]?.days.at(-1);
 
   const { day, day_report, project_link, time } = recentSubmissions;
 
