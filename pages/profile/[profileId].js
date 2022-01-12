@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
 
   if (response.length === 0) {
     return {
-      fallback: true,
+      notFound: true,
     };
   }
 
