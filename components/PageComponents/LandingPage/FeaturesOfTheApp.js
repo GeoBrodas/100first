@@ -18,7 +18,9 @@ function FeaturesOfTheApp() {
         </div>
         <div className="flex flex-col space-y-6 mx-auto lg:h-56 bg-white rounded-xl w-2/3 py-6 md:py-10 items-center md:w-2/3">
           <SiPwa className="h-8 w-8 lg:h-14 lg:w-14" />
-          <p className="text-center text-lg font-medium px-8">Coming soon...</p>
+          <p className="text-center text-lg font-medium px-8">
+            Use 100First as any native mobile app! Install now!
+          </p>
         </div>
         <div className="flex flex-col space-y-6 mx-auto lg:h-56 bg-white rounded-xl w-2/3 py-6 md:py-10 items-center md:w-2/3">
           <FiShare2 className="h-8 w-8 lg:h-14 lg:w-14" />
