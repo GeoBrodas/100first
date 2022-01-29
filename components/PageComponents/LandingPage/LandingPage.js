@@ -34,6 +34,24 @@ function LandingPage() {
         </div>
       </div>
 
+      {/* Product hunt stuff */}
+      <div className="w-auto flex justify-center">
+        <a
+          href="https://www.producthunt.com/posts/100first?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-100first"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=328993&theme=light"
+            alt="100First - Track, Write, and complete the #100daysofcode seamlessly. | Product Hunt"
+            style={{ width: '250px', height: '54px' }}
+            width="250"
+            height="54"
+          />
+        </a>
+      </div>
+
       {/* What is #100daysofcode challenge? */}
       <AboutTheChallenge />
 
