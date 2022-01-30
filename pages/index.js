@@ -9,7 +9,7 @@ export default function Home() {
         {/* description */}
         <meta
           name="description"
-          content="100first - Complete with focus, a web application
+          content="100first - a web application
         that helps you to learn the basics of programming and complete the #100daysofcode challenge
         in a fun and easy way."
         />
@@ -21,7 +21,7 @@ export default function Home() {
         />
         <meta
           name="description"
-          content="100first - Complete with focus, a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
+          content="100first - a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
         />
 
         {/* <!-- Open Graph / Facebook --> */}
@@ -33,7 +33,7 @@ export default function Home() {
         />
         <meta
           property="og:description"
-          content="100first - Complete with focus, a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
+          content="100first - a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
         />
         <meta
           property="og:image"
@@ -49,7 +49,7 @@ export default function Home() {
         />
         <meta
           property="twitter:description"
-          content="100first - Complete with focus, a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
+          content="100first - a web application that helps you to learn the basics of programming and complete the #100daysofcode challenge in a fun and easy way."
         />
         <meta
           property="twitter:image"
